@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel AI Chatbot - Smart Tourism Assistant</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="common/css/variables.css?v=1">
+    <link rel="stylesheet" href="customer/css/style.css?v=15">
+</head>
+<body>
+    <main class="app-wrapper container-fluid px-3 px-md-4">
+        <div id="welcomeScreen" class="welcome-shell">
+            <header class="welcome-topbar">
+                <div class="brand-wrap">
+                    <span class="brand-dot"></span>
+                    <div>
+                        <div class="brand-title">Travel AI Chatbot</div>
+                        <small>Smart Tourism Assistant</small>
+                    </div>
+                </div>
+                <nav class="top-nav-pills">
+                    <button id="navHomeBtn" class="pill active" type="button">Home</button>
+                    <button id="navDestinationsBtn" class="pill" type="button">Destinations</button>
+                    <button id="navPackagesBtn" class="pill" type="button">Packages</button>
+                </nav>
+                <div class="welcome-actions d-flex gap-2 align-items-center">
+                    <button id="themeToggleBtn" class="btn btn-outline-light btn-sm px-3" type="button">Light</button>
+                    <button id="welcomeLoginBtn" class="btn btn-success btn-sm px-3" type="button">🔐 Login</button>
+                </div>
+            </header>
+            <section class="welcome-hero-card">
+                <div class="row g-4 align-items-center">
+                    <div class="col-lg-7">
+                        <span class="hero-chip">PROFESSIONAL TRAVEL ASSISTANT</span>
+                        <h1 class="hero-title mt-3 mb-3">Plan Your Next <span>Dream Trip</span></h1>
+                        <p class="hero-subtitle mb-4">
+                            Explore destinations, compare budgets, build day-wise itineraries, and get personalized guidance in one modern travel experience.
+                        </p>
+                        <div class="hero-cta d-flex flex-wrap gap-2 mb-4">
+                            <button id="browsePlansBtn" class="btn btn-info btn-sm px-3" type="button">Browse Plans</button>
+                            <button id="welcomeLoginBtnSecondary" class="btn btn-outline-light btn-sm px-3" type="button">Create Account</button>
+                        </div>
+                        <div class="hero-stats">
+                            <div><strong>150+</strong><small>Travel spots</small></div>
+                            <div><strong>40+</strong><small>Ready itineraries</small></div>
+                            <div><strong>24/7</strong><small>AI support</small></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="featured-image-card">
+                            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=900&q=80" alt="Featured travel destination">
+                            <div class="featured-caption">
+                                <small>FEATURED THIS WEEK</small>
+                                <h6>Tropical Beach Escape</h6>
+                                <p>Handpicked places and daily travel ideas from top-rated local experts.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <div class="row justify-content-center">
+            <div id="chatApp" class="col-12 col-xl-10 d-none">
+                <section class="chat-card card border-0 shadow-lg">
+                    <header class="card-header border-0 bg-transparent px-3 px-md-4 pt-4 pb-3">
+                        <div class="d-flex justify-content-between align-items-start gap-2 flex-wrap">
+                            <div>
+                                <h1 class="h4 mb-1 fw-bold text-primary">Travel AI Chatbot 🌍</h1>
+                                <p class="mb-0 text-muted">Smart Tourism Assistant for places, hotels, and packages 🧳</p>
+                            </div>
+                            <div class="d-flex gap-2 align-items-center">
+                                <button id="themeToggleMiniBtn" class="btn btn-outline-light btn-sm" type="button">Light</button>
+                                <button id="authBtn" class="btn btn-outline-primary btn-sm" type="button">🔐 Login / Register</button>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div class="card-body px-3 px-md-4 py-3">
+                        <div class="chat-layout">
+                            <aside class="sidebar-col">
+                                <div class="history-panel p-3 border rounded-4 bg-white shadow-sm">
+                                    <div class="d-flex justify-content-between align-items-center mb-2">
+                                        <h2 class="h6 mb-0">🕘 Chat History</h2>
+                                        <button id="newChatBtn" type="button" class="btn btn-primary btn-sm">➕ New Chat</button>
+                                    </div>
+                                    <div class="chat-title-save-wrap mb-2">
+                                        <label class="form-label small mb-1 text-muted" for="chatTitleInput">Save chat name</label>
+                                        <div class="input-group input-group-sm">
+                                            <input type="text" id="chatTitleInput" class="form-control" maxlength="120" placeholder="Name this chat…" autocomplete="off">
+                                            <button type="button" id="saveChatTitleBtn" class="btn btn-outline-success" title="Save name to history">💾 Save</button>
+                                        </div>
+                                    </div>
+                                    <div id="historyContainer" class="history-container"></div>
+                                    <div class="sidebar-actions pt-2 mt-2 border-top">
+                                        <div id="userMetaCard" class="user-meta-card d-none mb-2">
+                                            <span class="user-avatar">IA</span>
+                                            <span id="userBadge" class="user-name"></span>
+                                        </div>
+                                        <button id="profileBtn" class="btn btn-outline-secondary btn-sm w-100 mb-2 d-none" type="button">👤 Profile</button>
+                                        <button id="logoutBtn" class="btn btn-outline-danger btn-sm w-100 d-none" type="button">🚪 Logout</button>
+                                    </div>
+                                </div>
+                            </aside>
+                            <div class="chat-main-wrap">
+                                <div id="chatContainer">
+                                    <div class="message-row bot">
+                                        <div class="message-bubble">
+                                            Hi there! I am your travel assistant 😊 Ask me about destinations, hotels, itineraries, or budgets.
+                                            <span class="message-time" id="welcomeTime"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <footer class="card-footer bg-white border-0 px-3 px-md-4 pb-4 pt-2">
+                        <form id="chatForm" class="input-group chat-input-group">
+                            <button id="emojiToggleBtn" class="btn btn-outline-secondary" type="button" title="Add emoji">😊</button>
+                            <input
+                                id="messageInput"
+                                type="text"
+                                class="form-control"
+                                placeholder="Type your travel question... 😊"
+                                maxlength="1000"
+                                autocomplete="off"
+                                required
+                            >
+                            <button id="sendBtn" class="btn btn-primary px-4" type="submit">🚀 Send</button>
+                        </form>
+                        <div id="emojiPanel" class="emoji-panel d-none">
+                            <button type="button" class="emoji-btn">😊</button>
+                            <button type="button" class="emoji-btn">😍</button>
+                            <button type="button" class="emoji-btn">😎</button>
+                            <button type="button" class="emoji-btn">🤩</button>
+                            <button type="button" class="emoji-btn">✈️</button>
+                            <button type="button" class="emoji-btn">🌍</button>
+                            <button type="button" class="emoji-btn">🏖️</button>
+                            <button type="button" class="emoji-btn">🏔️</button>
+                            <button type="button" class="emoji-btn">🧳</button>
+                            <button type="button" class="emoji-btn">🍽️</button>
+                            <button type="button" class="emoji-btn">📸</button>
+                            <button type="button" class="emoji-btn">❤️</button>
+                        </div>
+                    </footer>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <div class="modal fade" id="authModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Account Access 🔐</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div id="authSuccessAlert" class="auth-register-success alert alert-success border border-success mb-3 d-none" role="status" aria-live="polite">
+                        <div class="d-flex gap-2 align-items-start">
+                            <span class="auth-success-check" aria-hidden="true">✓</span>
+                            <div>
+                                <strong id="authSuccessTitle" class="d-block mb-1"></strong>
+                                <span id="authSuccessLineEn" class="small d-block"></span>
+                                <span id="authSuccessLineI18n" class="small d-block mt-1 text-reset opacity-75"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="nav nav-tabs mb-3" id="authTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#loginPane" type="button" role="tab">Login 🔑</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#registerPane" type="button" role="tab">Register 📝</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="loginPane" role="tabpanel">
+                            <form id="loginForm" class="d-grid gap-2">
+                                <input type="email" id="loginEmail" class="form-control" placeholder="Email" required>
+                                <div class="password-field-wrap">
+                                    <input type="password" id="loginPassword" class="form-control pe-5" placeholder="Password" required>
+                                    <button type="button" id="toggleLoginPassword" class="password-toggle-btn" aria-label="Show password" aria-controls="loginPassword">👁️</button>
+                                </div>
+                                <button class="btn btn-primary" type="submit">Login</button>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="registerPane" role="tabpanel">
+                            <form id="registerForm" class="d-grid gap-2">
+                                <input type="text" id="registerName" class="form-control" placeholder="Full Name" required>
+                                <input type="email" id="registerEmail" class="form-control" placeholder="Email" required>
+                                <input type="password" id="registerPassword" class="form-control" placeholder="Password (min 6 chars)" minlength="6" required>
+                                <button class="btn btn-success" type="submit">Register</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="profileModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="profileForm" class="d-grid gap-2">
+                        <input type="text" id="profileName" class="form-control" placeholder="Full Name" required>
+                        <input type="email" id="profileEmail" class="form-control" placeholder="Email" required>
+                        <input type="password" id="profilePassword" class="form-control" placeholder="New Password (optional)">
+                        <button class="btn btn-primary" type="submit">Save Profile</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="logoutFeedback" class="logout-feedback alert alert-secondary border shadow-sm mb-0 py-2 px-3 d-none" role="status" aria-live="polite">
+        <strong id="logoutFeedbackTitle" class="d-block small mb-1"></strong>
+        <span id="logoutFeedbackI18n" class="small text-body-secondary d-block"></span>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@joeattardi/emoji-button@4.6.4/dist/index.min.js"></script>
+    <script src="customer/js/script.js?v=15"></script>
+</body>
+</html>

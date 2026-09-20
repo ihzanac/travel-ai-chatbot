@@ -1,0 +1,34 @@
+body.admin-body {
+    background: #0f172a;
+    color: #e2e8f0;
+}
+
+.admin-card {
+    background: #111827;
+    border: 1px solid #1f2937;
+    color: #e5e7eb;
+}
+
+.table td, .table th {
+    color: #e5e7eb;
+}
+
+#dashboardCards .card .small {
+    letter-spacing: 0.3px;
+}
+
+.admin-feedback {
+    border-radius: 10px;
+    animation: admin-feedback-in 0.3s ease-out;
+}
+
+@keyframes admin-feedback-in {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

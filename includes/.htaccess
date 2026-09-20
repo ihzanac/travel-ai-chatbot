@@ -1,0 +1,4 @@
+# Deny direct HTTP access to PHP includes (Apache 2.4+)
+<IfModule mod_authz_core.c>
+    Require all denied
+</IfModule>

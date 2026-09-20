@@ -1,0 +1,5 @@
+/* Shared design tokens (customer UI, admin UI, and future pages) */
+:root {
+    --app-font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --app-radius: 0.5rem;
+}
